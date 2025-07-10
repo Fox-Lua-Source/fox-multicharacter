@@ -62,9 +62,9 @@ body {
 
 .character-square {
     position: relative;
-    width: 18vw;
-    max-width: 200px;
-    min-width: 150px;
+    width: 22vw;            /* was 18vw */
+    max-width: 265px;       /* was 200px */
+    min-width: 190px;       /* was 150px */
     aspect-ratio: 1/1;
     background: linear-gradient(156deg, #23180e 82%, #18120b 100%);
     border: 2.5px solid var(--mafia-outline);
@@ -76,6 +76,7 @@ body {
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
+    min-height: 320px;      /* a bit taller for extra lines */
 }
 
 .character-square:hover,
@@ -155,12 +156,13 @@ body {
     display: flex;
     align-items: center;
     gap: 12px;
-    width: 80%;
-    padding: 8px 12px;
+    width: 92%;           /* was 80% */
+    padding: 10px 12px;   /* a bit more padding for readability */
     border-radius: var(--mafia-border-radius);
     background: rgba(212,175,55,0.07);
     border: 1.5px solid rgba(212,175,55,0.14);
     transition: all var(--mafia-transition);
+    min-height: 38px;     /* make taller to fit multi-line text */
 }
 
 .stat-row:hover {
@@ -180,8 +182,12 @@ body {
     color: var(--mafia-text-light);
     font-family: var(--mafia-font-primary);
     font-size: 15px;
-    flex: 1;
+    flex: 1 1 0%;
     letter-spacing: 0.7px;
+    white-space: normal;         /* Allow text to wrap */
+    overflow-wrap: break-word;   /* Break long words if needed */
+    word-break: break-word;
+    display: block;
 }
 
 /* Character Name */
@@ -475,19 +481,16 @@ body {
         gap: 16px;
     }
     .character-square {
-        width: 130px;
-        min-width: 130px;
-    }
-    .character-register {
-        width: 90%;
-        max-width: 400px;
-        padding: 27px;
+        width: 170px;
+        min-width: 150px;
+        max-width: 220px;
     }
     .stat-row {
-        width: 90%;
+        width: 95%;
+        min-height: 34px;
     }
     .stat-value {
-        font-size: 12px;
+        font-size: 13px;
     }
     .character-name {
         font-size: 16px;
