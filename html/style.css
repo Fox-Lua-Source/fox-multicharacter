@@ -540,3 +540,9 @@ body {
     border-radius: 6px;
     box-shadow: 0 0 10px #d4af3742;
 }
+
+/* Make Vuetify v-select dropdown scrollable for long lists */
+.v-menu__content .v-list {
+  max-height: 500px !important;
+  overflow-y: auto !important;
+}

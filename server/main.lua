@@ -1,5 +1,6 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 local hasDonePreloading = {}
+
 local Countries = json.decode(LoadResourceFile(GetCurrentResourceName(), 'countries.json'))
 
 

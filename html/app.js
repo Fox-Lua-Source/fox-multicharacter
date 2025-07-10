@@ -158,6 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         translationManager.setTranslations(event.data.translations);
                         this.translations = event.data.translations;
                         this.nationalities = event.data.countries;
+
                         this.characterAmount = data.nChar;
                         this.selectedCharacter = -1;
                         this.show.register = false;
@@ -214,3 +215,5 @@ document.addEventListener("DOMContentLoaded", () => {
         },
     });
 });
+
+
