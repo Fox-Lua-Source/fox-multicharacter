@@ -15,6 +15,9 @@ class TranslationManager {
             firstname: "First Name",
             lastname: "Last Name",
             nationality: "Nationality",
+            // --- Added for searchable nationalities ---
+            search_nationality: "Search nationality...",
+            // ------------------------------------------
             birthdate: "Date of Birth",
             gender: "Gender",
             male: "Male",

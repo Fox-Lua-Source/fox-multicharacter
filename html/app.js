@@ -1,8 +1,6 @@
 let re = "(" + profList.join("|") + ")\\b";
 const regTest = new RegExp(re, "i");
 
-
-
 document.addEventListener("DOMContentLoaded", () => {
     const viewmodel = new Vue({
         el: "#app",
@@ -17,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 delete: false,
             },
             registerData: {
-                date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10),
+                date: "1956-01-01", // Default DOB
                 firstname: undefined,
                 lastname: undefined,
                 nationality: undefined,
@@ -32,6 +30,8 @@ document.addEventListener("DOMContentLoaded", () => {
             translations: {},
             customNationality: false,
             nationalities: [],
+            nationalitySearch: "",
+            filteredNationalities: [],
         },
         methods: {
             click_character: function (idx, type) {
@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 this.show.characters = false;
                 this.show.register = true;
                 this.registerData = {
-                    date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10),
+                    date: "1956-01-01", // Default DOB on reset
                     firstname: undefined,
                     lastname: undefined,
                     nationality: undefined,
@@ -145,6 +145,21 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 return translationManager.translate(key);
             },
+            filterNationalities() {
+                const search = this.nationalitySearch.toLowerCase();
+                if (!search) {
+                    this.filteredNationalities = this.nationalities.slice();
+                } else {
+                    this.filteredNationalities = this.nationalities.filter(n =>
+                        n.toLowerCase().includes(search)
+                    );
+                }
+            },
+        },
+        watch: {
+            nationalities(newList) {
+                this.filteredNationalities = newList.slice();
+            }
         },
         mounted() {
             initializeValidator();
@@ -158,6 +173,8 @@ document.addEventListener("DOMContentLoaded", () => {
                         translationManager.setTranslations(event.data.translations);
                         this.translations = event.data.translations;
                         this.nationalities = event.data.countries;
+                        this.filteredNationalities = event.data.countries ? event.data.countries.slice() : [];
+                        this.nationalitySearch = "";
 
                         this.characterAmount = data.nChar;
                         this.selectedCharacter = -1;
@@ -215,5 +232,3 @@ document.addEventListener("DOMContentLoaded", () => {
         },
     });
 });
-
-

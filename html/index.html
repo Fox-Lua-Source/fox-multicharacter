@@ -115,17 +115,41 @@
                                     <v-text-field :placeholder="translate('firstname')" solo hide-details="auto" v-model="registerData.firstname"></v-text-field>
                                     <v-text-field :placeholder="translate('lastname')" solo hide-details="auto" v-model="registerData.lastname"></v-text-field>
                                     <v-text-field v-if="customNationality" :placeholder="translate('nationality')" solo hide-details="auto" v-model="registerData.nationality"></v-text-field>
-                                    <v-select v-else solo :placeholder="translate('nationality')" :items="nationalities" hide-details="auto" v-ripple v-model="registerData.nationality"></v-select>
+                                    <template v-else>
+                                        <v-select
+                                            solo
+                                            :placeholder="translate('nationality')"
+                                            :items="filteredNationalities"
+                                            hide-details="auto"
+                                            v-ripple
+                                            v-model="registerData.nationality"
+                                            @update:menu="menu => { if(menu) { nationalitySearch = ''; filterNationalities(); } }"
+                                        >
+                                            <template v-slot:prepend-item>
+                                                <v-text-field
+                                                    v-model="nationalitySearch"
+                                                    :placeholder="translate('search_nationality') || 'Search nationality...'"
+                                                    @input="filterNationalities"
+                                                    clearable
+                                                    solo
+                                                    hide-details
+                                                    style="margin-bottom:4px"
+                                                    autofocus
+                                                ></v-text-field>
+                                                <v-divider></v-divider>
+                                            </template>
+                                        </v-select>
+                                    </template>
                                     <v-select solo :placeholder="translate('gender')" :items="[translate('male'), translate('female')]" hide-details="auto" v-ripple v-model="registerData.gender"></v-select>
                                     <v-dialog ref="dialog" v-model="dataPickerMenu" :return-value.sync="registerData.date" persistent width="290px">
                                         <template v-slot:activator="{ on, attrs }">
                                             <v-text-field v-model="registerData.date" :label="translate('birthdate')" readonly v-bind="attrs" v-on="on" solo></v-text-field>
                                         </template>
-										<v-date-picker v-model="registerData.date" min="1900-01-01" max="1956-12-31">
-										<v-spacer></v-spacer>
-										<v-btn text class="date-cancel-btn" @click="dataPickerMenu = false">{{translate('cancel')}}</v-btn>
-										<v-btn text class="date-confirm-btn" @click="$refs.dialog.save(registerData.date)">{{translate('confirm')}}</v-btn>
-									</v-date-picker>
+                                        <v-date-picker v-model="registerData.date" min="1900-01-01" max="1956-12-31">
+                                            <v-spacer></v-spacer>
+                                            <v-btn text class="date-cancel-btn" @click="dataPickerMenu = false">{{translate('cancel')}}</v-btn>
+                                            <v-btn text class="date-confirm-btn" @click="$refs.dialog.save(registerData.date)">{{translate('confirm')}}</v-btn>
+                                        </v-date-picker>
                                     </v-dialog>
                                 </div>
                                 <v-btn class="character-reg-btn" v-ripple @click="create_character" large>{{translate('create_button')}}</v-btn>
