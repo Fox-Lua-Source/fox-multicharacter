@@ -30,6 +30,7 @@ local function loadModel(model)
     end
 end
 
+
 local function initializePedModel(model, data)
     CreateThread(function()
         if not model then
@@ -68,7 +69,7 @@ local function skyCam(bool)
 end
 
 local function openCharMenu(bool)
-    QBCore.Functions.TriggerCallback("qb-multicharacter:server:GetNumberOfCharacters", function(result, countries)
+    QBCore.Functions.TriggerCallback("qb-multicharacter:server:GetNumberOfCharacters", function(result)
         local translations = {}
         for k in pairs(Lang.fallback and Lang.fallback.phrases or Lang.phrases) do
             if k:sub(0, ('ui.'):len()) then
@@ -82,8 +83,7 @@ local function openCharMenu(bool)
             toggle = bool,
             nChar = result,
             enableDeleteButton = Config.EnableDeleteButton,
-            translations = translations,
-            countries = countries -- <-- Pass countries to NUI
+            translations = translations
         })
         skyCam(bool)
         if not loadScreenCheckState then

@@ -1,6 +1,8 @@
 let re = "(" + profList.join("|") + ")\\b";
 const regTest = new RegExp(re, "i");
 
+
+
 document.addEventListener("DOMContentLoaded", () => {
     const viewmodel = new Vue({
         el: "#app",

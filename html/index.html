@@ -79,8 +79,10 @@
                                     </div>
 
                                     <!-- Bottom section - Character name -->
-                                    <div class="character-name-container">
-                                        <div class="character-name">{{characters[index].charinfo.firstname}} {{characters[index].charinfo.lastname}}</div>
+                                    <div class="character-name-container" style="min-height:48px; white-space:normal; overflow:visible;">
+                                        <div class="character-name" style="display:block; max-width:95%; overflow-wrap:break-word; white-space:normal; line-height:1.1;">
+                                            {{characters[index].charinfo.firstname}} {{characters[index].charinfo.lastname}}
+                                        </div>
                                     </div>
                                 </template>
 

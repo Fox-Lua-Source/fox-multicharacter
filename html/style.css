@@ -50,7 +50,7 @@ body {
 .character-selection-container {
     position: fixed;
     bottom: 40px;
-    height: 30%;
+    height: 35%;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
