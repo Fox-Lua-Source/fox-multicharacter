@@ -189,6 +189,7 @@ QBCore.Functions.CreateCallback("qb-multicharacter:server:setupCharacters", func
             result[i].charinfo = json.decode(result[i].charinfo)
             result[i].money = json.decode(result[i].money)
             result[i].job = json.decode(result[i].job)
+            result[i].gang = json.decode(result[i].gang or '{}') -- <-- ADDED: ensure gang data is provided to client
             plyChars[#plyChars+1] = result[i]
         end
         cb(plyChars)

@@ -43,7 +43,7 @@
 
                         <!-- Character Selection Container -->
                         <div class="character-selection-container" v-if="show.characters">
-                            <div v-for="index in characterAmount" :key="index" class="character-square" :class="{'character-selected': selectedCharacter == index}" @click="click_character(index, characters[index])">
+                            <div v-for="index in characterAmount" :key="index" class="character-square" :class="{'character-selected': selectedCharacter == index}" @click="click_character(index, characters[index] ? 'existing' : 'empty')">
                                 <!-- For character slots with data -->
                                 <template v-if="characters[index]">
                                     <!-- Top section - Action buttons -->
@@ -58,6 +58,12 @@
 
                                     <!-- Middle section - Character stats -->
                                     <div class="character-stats">
+                                        <!-- Gang Info Row (NEW) -->
+                                        <div class="stat-row" v-if="characters[index].gang && characters[index].gang.label">
+                                            <span class="material-symbols-outlined">groups</span>
+                                            <span class="stat-value">{{characters[index].gang.label}}</span>
+                                        </div>
+                                        <!-- Job Info Row (EXISTING) -->
                                         <div class="stat-row">
                                             <span class="material-symbols-outlined">badge</span>
                                             <span class="stat-value">{{characters[index].job.label}}</span>
