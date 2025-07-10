@@ -13,6 +13,13 @@
         <script src="swal2.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
         <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet" />
+        <!-- Mafia font for titles -->
+        <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+        <style>
+            /* Hide scrollbars for mafia vibe */
+            ::-webkit-scrollbar { width: 0 !important; }
+            html { scrollbar-width: none; }
+        </style>
     </head>
     <body>
         <v-app data-app>
@@ -36,7 +43,7 @@
 
                         <!-- Character Selection Container -->
                         <div class="character-selection-container" v-if="show.characters">
-                            <div v-for="index in characterAmount" :key="index" class="character-square" :class="{'character-selected': selectedCharacter == index}" @click="click_character(index, characters[index] ? 'existing' : 'empty')">
+                            <div v-for="index in characterAmount" :key="index" class="character-square" :class="{'character-selected': selectedCharacter == index}" @click="click_character(index, characters[index])">
                                 <!-- For character slots with data -->
                                 <template v-if="characters[index]">
                                     <!-- Top section - Action buttons -->
@@ -106,11 +113,11 @@
                                         <template v-slot:activator="{ on, attrs }">
                                             <v-text-field v-model="registerData.date" :label="translate('birthdate')" readonly v-bind="attrs" v-on="on" solo></v-text-field>
                                         </template>
-                                        <v-date-picker v-model="registerData.date" min="1900-01-01" max="2100-12-31">
-                                            <v-spacer></v-spacer>
-                                            <v-btn text class="date-cancel-btn" @click="dataPickerMenu = false">{{translate('cancel')}}</v-btn>
-                                            <v-btn text class="date-confirm-btn" @click="$refs.dialog.save(registerData.date)">{{translate('confirm')}}</v-btn>
-                                        </v-date-picker>
+										<v-date-picker v-model="registerData.date" min="1900-01-01" max="1956-12-31">
+										<v-spacer></v-spacer>
+										<v-btn text class="date-cancel-btn" @click="dataPickerMenu = false">{{translate('cancel')}}</v-btn>
+										<v-btn text class="date-confirm-btn" @click="$refs.dialog.save(registerData.date)">{{translate('confirm')}}</v-btn>
+									</v-date-picker>
                                     </v-dialog>
                                 </div>
                                 <v-btn class="character-reg-btn" v-ripple @click="create_character" large>{{translate('create_button')}}</v-btn>

@@ -1,6 +1,5 @@
 /**
- * Validation utility for QB-Multicharacter
- * Handles character creation validation logic
+ * Character form validation for QB-Multicharacter
  */
 
 class CharacterValidator {
@@ -102,8 +101,7 @@ class CharacterValidator {
         }
 
         // Check reasonable range
-        const currentYear = new Date().getFullYear();
-        if (year < 1900 || year > currentYear) {
+        if (year < 1900 || year > 1956) {
             return false;
         }
 
@@ -120,9 +118,5 @@ function initializeValidator() {
         const re = "(" + profList.join("|") + ")\\b";
         const profanityRegex = new RegExp(re, "i");
         characterValidator = new CharacterValidator(profanityRegex);
-    } else {
-        console.error("Profanity list not found. Validation may not work correctly.");
-        // Create with empty regex as fallback
-        characterValidator = new CharacterValidator(/^$/);
     }
 }
