@@ -82,7 +82,7 @@ body {
 .character-square:hover,
 .character-selected {
     border-color: var(--mafia-gold);
-    box-shadow: 0 8px 36px var(--mafia-gold-dark), var(--mafia-shadow);
+    box-shadow: 0 4px 16px var(--mafia-gold-dark), var(--mafia-shadow);
     background: linear-gradient(150deg, #2a200f 70%, var(--mafia-brown) 100%);
     transform: translateY(-14px) scale(1.045) rotateX(3deg);
 }
@@ -239,6 +239,49 @@ body {
     text-shadow: 0 0 24px #d4af37b3;
     background: rgba(44, 31, 11, 0.16);
     border-color: var(--mafia-gold);
+}
+
+/*------------------------------------*\
+  #PERMA-KILLED CHARACTER STYLES
+\*------------------------------------*/
+.dead-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mafia-font-title);
+    font-size: 21px;
+    font-weight: 700;
+    color: var(--mafia-red);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 12px 0 2px 0;
+    text-shadow: 0 1px 10px #a00b, 0 0 2px #000;
+    gap: 10px;
+    flex-direction: column;
+}
+
+.dead-icon {
+    font-size: 26px;
+    color: var(--mafia-red);
+    text-shadow: 0 0 5px #a00b;
+}
+
+.dead-character-stats {
+    padding: 26px 0 8px 0;
+    background: linear-gradient(180deg, #2a220f80 0%, transparent 100%);
+    min-height: 80px;
+}
+
+/* Appeal text under DEAD label */
+.dead-appeal {
+    font-family: var(--mafia-font-primary);
+    font-size: 13px;
+    color: var(--mafia-text-light);
+    opacity: 0.7;
+    text-align: center;
+    margin-top: 4px;
+    letter-spacing: 1px;
+    text-shadow: 0 0 1px #000, 0 0 2px #b03a2e;
 }
 
 /*------------------------------------*\

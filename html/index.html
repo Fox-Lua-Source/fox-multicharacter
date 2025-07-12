@@ -48,42 +48,63 @@
                                 <template v-if="characters[index]">
                                     <!-- Top section - Action buttons -->
                                     <div class="character-actions">
-                                        <div class="action-btn play-btn" @click.stop="play_character">
+                                        <!-- Only show play button if NOT perma killed -->
+                                        <div v-if="characters[index].permakilled != 1" class="action-btn play-btn" @click.stop="play_character">
                                             <span class="material-symbols-outlined">play_circle</span>
                                         </div>
+                                        <!-- Always show delete button if allowed -->
                                         <div v-if="allowDelete" class="action-btn delete-btn" @click.stop="prepareDelete">
                                             <span class="material-symbols-outlined">delete</span>
                                         </div>
                                     </div>
 
-                                    <!-- Middle section - Character stats -->
-                                    <div class="character-stats">
-                                        <!-- Gang Info Row (NEW) -->
-                                        <div class="stat-row" v-if="characters[index].gang && characters[index].gang.label">
-                                            <span class="material-symbols-outlined">groups</span>
-                                            <span class="stat-value">{{characters[index].gang.label}}</span>
+                                    <!-- If permakilled, show DEAD label and name only -->
+                                    <template v-if="characters[index].permakilled == 1">
+                                        <div class="character-stats dead-character-stats">
+                                            <div class="dead-label">
+                                                <span class="material-symbols-outlined dead-icon">skull</span>
+                                                <span>DEAD</span>
+												 <span class="dead-appeal">Appeal on discord</span>
+                                            </div>
                                         </div>
-                                        <!-- Job Info Row (EXISTING) -->
-                                        <div class="stat-row">
-                                            <span class="material-symbols-outlined">badge</span>
-                                            <span class="stat-value">{{characters[index].job.label}}</span>
+                                        <div class="character-name-container" style="min-height:48px; white-space:normal; overflow:visible;">
+                                            <div class="character-name" style="display:block; max-width:95%; overflow-wrap:break-word; white-space:normal; line-height:1.1;">
+                                                {{characters[index].charinfo.firstname}} {{characters[index].charinfo.lastname}}
+                                            </div>
                                         </div>
-                                        <div class="stat-row">
-                                            <span class="material-symbols-outlined">payments</span>
-                                            <span class="stat-value">${{dollar.format(characters[index].money.cash)}}</span>
-                                        </div>
-                                        <div class="stat-row">
-                                            <span class="material-symbols-outlined">wallet</span>
-                                            <span class="stat-value">${{dollar.format(characters[index].money.bank)}}</span>
-                                        </div>
-                                    </div>
+                                    </template>
 
-                                    <!-- Bottom section - Character name -->
-                                    <div class="character-name-container" style="min-height:48px; white-space:normal; overflow:visible;">
-                                        <div class="character-name" style="display:block; max-width:95%; overflow-wrap:break-word; white-space:normal; line-height:1.1;">
-                                            {{characters[index].charinfo.firstname}} {{characters[index].charinfo.lastname}}
+                                    <!-- Normal character info for alive characters -->
+                                    <template v-else>
+                                        <!-- Middle section - Character stats -->
+                                        <div class="character-stats">
+                                            <!-- Gang Info Row (NEW) -->
+                                            <div class="stat-row" v-if="characters[index].gang && characters[index].gang.label">
+                                                <span class="material-symbols-outlined">groups</span>
+                                                <span class="stat-value">{{characters[index].gang.label}}</span>
+                                            </div>
+                                            <!-- Job Info Row (EXISTING) -->
+                                            <div class="stat-row">
+                                                <span class="material-symbols-outlined">badge</span>
+                                                <span class="stat-value">{{characters[index].job.label}}</span>
+                                            </div>
+                                            <div class="stat-row">
+                                                <span class="material-symbols-outlined">payments</span>
+                                                <span class="stat-value">${{dollar.format(characters[index].money.cash)}}</span>
+                                            </div>
+                                            <div class="stat-row">
+                                                <span class="material-symbols-outlined">wallet</span>
+                                                <span class="stat-value">${{dollar.format(characters[index].money.bank)}}</span>
+                                            </div>
                                         </div>
-                                    </div>
+
+                                        <!-- Bottom section - Character name -->
+                                        <div class="character-name-container" style="min-height:48px; white-space:normal; overflow:visible;">
+                                            <div class="character-name" style="display:block; max-width:95%; overflow-wrap:break-word; white-space:normal; line-height:1.1;">
+                                                {{characters[index].charinfo.firstname}} {{characters[index].charinfo.lastname}}
+                                            </div>
+                                        </div>
+                                    </template>
                                 </template>
 
                                 <!-- For empty slots -->
